@@ -14,10 +14,10 @@ steps:
   args: 
     - -c
     - |
-      pwd && \
+      "pwd && \
       ls && \
       airflow db init && \
-      pytest dags/drugs_data_pipeline/tests/unit
+      pytest dags/drugs_data_pipeline/tests/unit"
   timeout: 200s
 
 # - name: "gcr.io/cloud-builders/kubectl"
