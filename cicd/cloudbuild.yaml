@@ -10,9 +10,8 @@ steps:
 # Execute Unit Tests 
 # on built Docker image
 - name: "$_IMAGE_NAME:latest"
-  # entrypoint: 'bash'
+  entrypoint: 'bash -c'
   args: 
-    - 'bash -c'
     - '"airflow db init"'
   timeout: 200s
 
