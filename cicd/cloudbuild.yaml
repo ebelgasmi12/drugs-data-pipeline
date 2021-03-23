@@ -14,7 +14,7 @@ steps:
   args: 
     - "-c"
     - |
-      "pwd"
+      "ls"
   timeout: 200s
 
 # - name: "gcr.io/cloud-builders/kubectl"
