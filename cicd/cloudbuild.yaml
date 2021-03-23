@@ -14,7 +14,7 @@ steps:
 substitutions:
   _IMAGE_TAG: "gcr.io/${PROJECT_NAME}/${REPO_NAME}-${BRANCH_NAME}"
 
-images: [${_IMAGE_TAG}]
+images: ["${_IMAGE_TAG}"]
 
 timeout: 660s
 
