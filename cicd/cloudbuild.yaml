@@ -3,7 +3,7 @@ steps:
   args: ['build', '-t', 'gcr.io/mehdib-airflow-project/drugs-data-pipeline', '.']
   timeout: 500s
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/airflow/drugs-data-pipeline']
+  args: ['push', 'gcr.io/mehdib-airflow-project/drugs-data-pipeline']
 # - name: 'gcr.io/cloud-builders/kubectl'
 #   args: ['set', 'image', 'deployment/my-deployment', 'my-container=gcr.io/my-project/my-image']
 #   env:
