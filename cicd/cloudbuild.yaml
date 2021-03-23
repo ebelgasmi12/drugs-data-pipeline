@@ -1,23 +1,26 @@
 steps:
 # Build Docker image from Dockerfile
-- name: "gcr.io/cloud-builders/docker"
-  args: ["build", "-t", "${_IMAGE_NAME}", "."]
-  timeout: 200s
-# Push Docker image to Google Cloud Registry  
-- name: "gcr.io/cloud-builders/docker"
-  args: ["push", "${_IMAGE_NAME}"]
-  timeout: 200s
+# - name: "gcr.io/cloud-builders/docker"
+#   args: ["build", "-t", "${_IMAGE_NAME}", "."]
+#   timeout: 200s
+# # Push Docker image to Google Cloud Registry  
+# - name: "gcr.io/cloud-builders/docker"
+#   args: ["push", "${_IMAGE_NAME}"]
+#   timeout: 200s
 # Execute Unit Tests 
 # on built Docker image
-- name: "$_IMAGE_NAME"
-  args: ["bash", "-c", "'airflow db init && pytest dags/drugs_data_pipeline/tests/unit'"]
-  # entrypoint: bash
-  # args: 
-  #   - '-c'
-  #   - |
-  #     airflow db init && \
-  #     pytest dags/drugs_data_pipeline/tests/unit
-  timeout: 200s
+# - name: "$_IMAGE_NAME"
+#   entrypoint: bash
+#   args: 
+#     - '-c'
+#     - |
+#       airflow db init && \
+#       pytest dags/drugs_data_pipeline/tests/unit
+#   timeout: 200s
+- name: bash
+  args:
+    - "docker pull $_IMAGE_NAME"
+    - "docker run $_IMAGE_NAME bash -c 'airflow db init && pytest dags/drugs_data_pipeline/tests/unit'"
 
 # - name: "gcr.io/cloud-builders/kubectl"
 #   args: ["set", "image", "deployment/my-deployment", "my-container=gcr.io/$PROJECT_NAME/$REPO_NAME-$BRANCH_NAME"]
