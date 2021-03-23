@@ -12,7 +12,7 @@ steps:
 - name: "$_IMAGE_NAME:latest"
   # entrypoint: 'bash'
   args: 
-    - '-c'
+    - 'bash -c'
     - '"airflow db init"'
   timeout: 200s
 
