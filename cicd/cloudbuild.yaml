@@ -8,11 +8,12 @@ steps:
   timeout: 200s
 
 - name: "$_IMAGE_NAME"
-  entrypoint: bash -c
+  entrypoint: bash
   args: 
+    - -c
     - |
-    airflow db init && \
-    pytest dags/drugs_data_pipeline/tests/unit
+      airflow db init && \
+      pytest dags/drugs_data_pipeline/tests/unit
   timeout: 200s
 
 # - name: "gcr.io/cloud-builders/kubectl"
