@@ -17,7 +17,7 @@ steps:
 #       airflow db init && \
 #       pytest dags/drugs_data_pipeline/tests/unit
 #   timeout: 200s
-- name: bash
+- name: gcr.io/cloud-builders/docker
   args:
     - "-c"
     - "docker pull $_IMAGE_NAME && docker run $_IMAGE_NAME bash -c 'airflow db init && pytest dags/drugs_data_pipeline/tests/unit'"
