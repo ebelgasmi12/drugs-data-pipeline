@@ -19,8 +19,8 @@ steps:
 #   timeout: 200s
 - name: bash
   args:
-    - "docker pull $_IMAGE_NAME"
-    - "docker run $_IMAGE_NAME bash -c 'airflow db init && pytest dags/drugs_data_pipeline/tests/unit'"
+    - "-c"
+    - "docker pull $_IMAGE_NAME && docker run $_IMAGE_NAME bash -c 'airflow db init && pytest dags/drugs_data_pipeline/tests/unit'"
 
 # - name: "gcr.io/cloud-builders/kubectl"
 #   args: ["set", "image", "deployment/my-deployment", "my-container=gcr.io/$PROJECT_NAME/$REPO_NAME-$BRANCH_NAME"]
