@@ -9,12 +9,12 @@ steps:
 #   timeout: 200s
 # Execute Unit Tests 
 # on built Docker image
-- name: "$_IMAGE_NAME"
+- name: "$_IMAGE_NAME:latest"
   entrypoint: bash
   args: 
     - "-c"
     - |
-      pwd
+      "pwd"
   timeout: 200s
 
 # - name: "gcr.io/cloud-builders/kubectl"
