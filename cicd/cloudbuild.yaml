@@ -1,9 +1,20 @@
 steps:
 - name: "gcr.io/cloud-builders/docker"
-  args: ["build", "-t", "${_IMAGE_TAG}", "."]
-  timeout: 500s
+  args: ["build", "-t", "${_IMAGE_NAME}", "."]
+  timeout: 200s
+  
 - name: "gcr.io/cloud-builders/docker"
-  args: ["push", "${_IMAGE_TAG}"]
+  args: ["push", "${_IMAGE_NAME}"]
+  timeout: 200s
+
+- name: "$_IMAGE_NAME"
+  entrypoint: bash -c
+  args: 
+    - |
+    airflow db init && \
+    pytest dags/drugs_data_pipeline/tests/unit
+  timeout: 200s
+
 # - name: "gcr.io/cloud-builders/kubectl"
 #   args: ["set", "image", "deployment/my-deployment", "my-container=gcr.io/$PROJECT_NAME/$REPO_NAME-$BRANCH_NAME"]
 #   env:
@@ -12,9 +23,9 @@ steps:
 # options:
 #     machineType: "N1_HIGHCPU_8"
 substitutions:
-  _IMAGE_TAG: "gcr.io/${PROJECT_ID}/${REPO_NAME}-${BRANCH_NAME}"
+  _IMAGE_NAME: "gcr.io/${PROJECT_ID}/${REPO_NAME}-${BRANCH_NAME}"
 
-images: ["${_IMAGE_TAG}"]
+images: ["${_IMAGE_NAME}"]
 
 timeout: 660s
 
