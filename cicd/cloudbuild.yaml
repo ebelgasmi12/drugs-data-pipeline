@@ -1,23 +1,20 @@
 steps:
-# Build Docker image from Dockerfile
-- name: "gcr.io/cloud-builders/docker"
-  args: ["build", "-t", "${_IMAGE_NAME}", "."]
-  timeout: 200s
-# Push Docker image to Google Cloud Registry  
-- name: "gcr.io/cloud-builders/docker"
-  args: ["push", "${_IMAGE_NAME}"]
-  timeout: 200s
+# # Build Docker image from Dockerfile
+# - name: "gcr.io/cloud-builders/docker"
+#   args: ["build", "-t", "${_IMAGE_NAME}", "."]
+#   timeout: 200s
+# # Push Docker image to Google Cloud Registry  
+# - name: "gcr.io/cloud-builders/docker"
+#   args: ["push", "${_IMAGE_NAME}"]
+#   timeout: 200s
 # Execute Unit Tests 
 # on built Docker image
 - name: "$_IMAGE_NAME"
   entrypoint: bash
   args: 
-    - -c
+    - "-c"
     - |
-      "pwd && \
-      ls && \
-      airflow db init && \
-      pytest dags/drugs_data_pipeline/tests/unit"
+      pwd
   timeout: 200s
 
 # - name: "gcr.io/cloud-builders/kubectl"
