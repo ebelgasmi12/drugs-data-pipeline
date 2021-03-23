@@ -6,6 +6,8 @@ WORKDIR ${AIRFLOW_HOME}
 
 COPY dags/ ${AIRFLOW_HOME}/dags
 
+COPY requirements.txt ${AIRFLOW_HOME}
+
 RUN ["pip", "install", "-r", "requirements.txt"]
 # COPY unittests.cfg ${AIRFLOW_HOME}/unittests.cfg
 # COPY airflow.cfg ${AIRFLOW_HOME}/airflow.cfg
