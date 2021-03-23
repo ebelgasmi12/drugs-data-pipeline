@@ -1,9 +1,9 @@
 steps:
 - name: "gcr.io/cloud-builders/docker"
-  args: ["build", "-t", "$_IMAGE_TAG", "."]
+  args: ["build", "-t", "${_IMAGE_TAG}", "."]
   timeout: 500s
 - name: "gcr.io/cloud-builders/docker"
-  args: ["push", "$_IMAGE_TAG"]
+  args: ["push", "${_IMAGE_TAG}"]
 # - name: "gcr.io/cloud-builders/kubectl"
 #   args: ["set", "image", "deployment/my-deployment", "my-container=gcr.io/$PROJECT_NAME/$REPO_NAME-$BRANCH_NAME"]
 #   env:
@@ -12,13 +12,13 @@ steps:
 # options:
 #     machineType: "N1_HIGHCPU_8"
 substitutions:
-  _IMAGE_TAG: gcr.io/$PROJECT_NAME/$REPO_NAME-$BRANCH_NAME
+  _IMAGE_TAG: "gcr.io/${PROJECT_NAME}/${REPO_NAME}-${BRANCH_NAME}"
 
-images: [$_IMAGE_TAG]
+images: [${_IMAGE_TAG}]
 
 timeout: 660s
 
 options:
   dynamic_substitutions: true
 
-tags: ["$REPO_NAME", "$BRANCH_NAME"]
+tags: ["${REPO_NAME}", "${BRANCH_NAME}"]
