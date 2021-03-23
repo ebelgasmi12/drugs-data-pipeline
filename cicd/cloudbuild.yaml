@@ -12,7 +12,7 @@ steps:
 # options:
 #     machineType: "N1_HIGHCPU_8"
 substitutions:
-  _IMAGE_TAG: "gcr.io/${PROJECT_NAME}/${REPO_NAME}-${BRANCH_NAME}"
+  _IMAGE_TAG: "gcr.io/${PROJECT_ID}/${REPO_NAME}-${BRANCH_NAME}"
 
 images: ["${_IMAGE_TAG}"]
 
