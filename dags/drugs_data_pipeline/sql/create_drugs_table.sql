@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS drugs;
+
+CREATE TABLE drugs (
+    atccode VARCHAR(10) PRIMARY KEY,
+    drug VARCHAR
+);
