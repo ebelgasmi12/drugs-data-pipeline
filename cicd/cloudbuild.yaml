@@ -9,12 +9,11 @@ steps:
 #   timeout: 200s
 # Execute Unit Tests 
 # on built Docker image
-- name: "$_IMAGE_NAME:latest"
+- name: "$_IMAGE_NAME"
   entrypoint: bash
   args: 
-    - "-c"
-    - |
-      "ls"
+    - '-c'
+    - 'airflow db init && pytest dags/drugs_data_pipeline/tests/unit'
   timeout: 200s
 
 # - name: "gcr.io/cloud-builders/kubectl"
