@@ -13,8 +13,8 @@ steps:
   args:
   - "-c"
   - |
-    docker pull $_IMAGE_NAME:latest &&
-    docker run --entrypoint bash $_IMAGE_NAME -c 'airflow db init && pytest dags/drugs_data_pipeline/tests/unit'
+    docker run --entrypoint bash $_IMAGE_NAME \
+    -c 'airflow db init && pytest $_UNITTEST_PATH'
 
 # - name: "gcr.io/cloud-builders/kubectl"
 #   args: ["set", "image", "deployment/my-deployment", "my-container=gcr.io/$PROJECT_NAME/$REPO_NAME-$BRANCH_NAME"]
@@ -25,6 +25,7 @@ steps:
 #     machineType: "N1_HIGHCPU_8"
 substitutions:
   _IMAGE_NAME: "gcr.io/${PROJECT_ID}/${REPO_NAME}-${BRANCH_NAME}"
+  _UNITTEST_PATH: "dags/drugs_data_pipeline/tests/unit"
 
 images: ["${_IMAGE_NAME}"]
 

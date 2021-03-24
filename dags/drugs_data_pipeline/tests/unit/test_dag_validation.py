@@ -6,7 +6,7 @@ class TestDagValidation:
     """
     # Import time threshold (in seconds)
     IMPORT_TIME_THRESHOLD = 2
-    EXPECTED_NUMBER_OF_DAGS = 2
+    EXPECTED_NUMBER_OF_DAGS = 1
     MAX_RETRIES = 5
     
     def test_dags_import(self, dagbag):
