@@ -8,8 +8,8 @@ steps:
   args: ["push", "${_IMAGE_NAME}"]
   timeout: 200s
 # Execute Unit Tests 
-on built Docker image
-- name: "$_IMAGE_NAME"
+# on built Docker image
+- name: "$_IMAGE_NAME:latest"
   entrypoint: bash
   args: 
     - -c
