@@ -1,6 +1,7 @@
 import csv
 import json
 import os
+import ast
 
 def is_int(s):
     """
@@ -45,15 +46,20 @@ def parse_file(file_path, extension, delimiter):
     with open(file_path, "r") as file_:
         # CSV file case
         if extension == "csv":
-            # Get rows and fields using CSV library
+            # Get rows and fields using "csv" library
             csv_reader = list(csv.reader(file_, delimiter=delimiter))
             nb_fields = len(csv_reader[0])
             rows = [row for row in csv_reader if len(row) == nb_fields]
             fields = rows.pop(0)
         # JSON file case
         elif extension == "json":
-            # Get rows and fields using JSON library
-            json_file = json.load(file_)
+            # Init dict
+            content = {}
+            # Get content using "json" library
+            try: content = json.load(file_)
+            # If "json" fails, use "ast" library
+            except: content = ast.literal_eval(file_.read())
+            # Get rows and fields from content
             fields = list(json_file[0].keys())
             rows = [[row[field] for field in fields]
                     for row in json_file]

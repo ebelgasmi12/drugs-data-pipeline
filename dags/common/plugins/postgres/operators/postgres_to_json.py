@@ -53,6 +53,6 @@ class PostgresToJSONOperator(BaseOperator):
             self.abs_file_path = get_absolute_path(self.file_path, context)
             # Export as JSON file
             with open(self.abs_file_path, "w") as json_file:
-                json.dump(results, json_file, indent="4")
+                json.dump(results, json_file, indent=4)
         # Raise block exception        
         except: raise

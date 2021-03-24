@@ -97,9 +97,13 @@ pythonenv*
 Thumbs.db
 
 ### vscode ###
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+
+# Airflow output
+dags/drugs_data-pipeline/data/output
