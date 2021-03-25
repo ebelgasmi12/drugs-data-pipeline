@@ -2,5 +2,6 @@
 # to store state
 terraform {
   backend "gcs" {
+    bucket      = var.gcs-tf-bucket
   }
 }

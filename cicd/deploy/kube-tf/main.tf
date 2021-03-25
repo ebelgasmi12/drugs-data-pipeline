@@ -1,14 +1,4 @@
-resource "google_storage_bucket" "tf-bucket" {
-  project       = var.project
-  name          = var.gcs-tf-bucket
-  location      = "europe-west1"
-  force_destroy = true
-  storage_class = "REGIONAL"
-  versioning {
-    enabled = true
-  }
-}
-
+# GKE Cluster creation
 module "gke" {
   source                     = "terraform-google-modules/kubernetes-engine/google"
   project_id                 = var.project
