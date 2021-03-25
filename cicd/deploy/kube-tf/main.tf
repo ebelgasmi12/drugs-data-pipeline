@@ -1,17 +1,18 @@
-# google_client_config and kubernetes provider must be explicitly specified like the following.
-data "google_client_config" "default" {}
-
-provider "kubernetes" {
-  load_config_file       = false
-  host                   = "https://${module.gke.endpoint}"
-  token                  = data.google_client_config.default.access_token
-  cluster_ca_certificate = base64decode(module.gke.ca_certificate)
+resource "google_storage_bucket" "tf-bucket" {
+  project       = var.project
+  name          = var.bucket-name
+  location      = "europe-west1"
+  force_destroy = true
+  storage_class = "REGIONAL"
+  versioning {
+    enabled = true
+  }
 }
 
 module "gke" {
   source                     = "terraform-google-modules/kubernetes-engine/google"
-  project_id                 = "${var.project}"
-  name                       = "${var.gke_cluster_name}"
+  project_id                 = var.project
+  name                       = var.gke-cluster-name
   region                     = "europe-west1"
   zones                      = ["europe-west1-b", "europe-west1-c", "europe-west1-d"]
   network                    = "default"
