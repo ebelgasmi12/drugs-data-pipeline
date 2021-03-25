@@ -24,7 +24,6 @@ steps:
 
 # Deploy Kubernetes Cluster in GKE
 - id: "Terraform Deploy GKE Cluster"
-  # name: "hashicorp/terraform:0.11.14"
   name: gcr.io/${PROJECT_ID}/terraform
   entrypoint: bash
   args: 

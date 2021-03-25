@@ -2,6 +2,6 @@
 # to store state
 terraform {
   backend "gcs" {
-    bucket      = var.gcs-tf-bucket
+    bucket      = "mehdib-airfow-tf-state"
   }
 }

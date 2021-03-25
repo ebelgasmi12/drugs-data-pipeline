@@ -15,13 +15,6 @@ variable project {
 }
 
 # GKE Cluster name
-variable gcs-tf-bucket {
-  type        = string
-  default     = "mehdib-airfow-tf-state"
-  description = "GCS Bucket name (for storing Terraform state)."
-}
-
-# GKE Cluster name
 variable gke-cluster-name {
   type        = string
   default     = "airflow-cluster"
