@@ -29,7 +29,8 @@ steps:
   args: 
   - "-c" 
   - |
-    cd cicd/deploy/kube-tf && bash apply.sh
+    export BRANCH_NAME = $BRANCH_NAME
+    cd cicd/deploy/terraform && bash apply.sh
 
 # - name: "gcr.io/cloud-builders/kubectl"
 #   args: ["set", "image", "deployment/my-deployment", "my-container=gcr.io/$PROJECT_NAME/$REPO_NAME-$BRANCH_NAME"]
