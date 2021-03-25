@@ -1,14 +1,10 @@
 ### macOS ###
-# General
 .DS_Store
 .AppleDouble
 .LSOverride
-
-# Thumbnails
 ._*
 
-### Python ###
-# Byte-compiled / optimized / DLL files
+### Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -18,7 +14,6 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
 dist/
 downloads/
@@ -36,8 +31,6 @@ share/python-wheels/
 MANIFEST
 
 # PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
 
@@ -82,7 +75,6 @@ celerybeat-schedule
 celerybeat.pid
 
 # Environments
-# .env
 .env/
 .venv/
 env/
@@ -96,7 +88,7 @@ pythonenv*
 *.DS_Store
 Thumbs.db
 
-### vscode ###
+# vscode
 .vscode
 .vscode/*
 !.vscode/settings.json
@@ -107,3 +99,8 @@ Thumbs.db
 
 # Airflow output
 dags/drugs_data-pipeline/data/output
+
+# Terraform
+*.tfstate*
+.terraform/
+.terraform*
