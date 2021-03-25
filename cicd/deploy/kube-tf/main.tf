@@ -1,6 +1,6 @@
 resource "google_storage_bucket" "tf-bucket" {
   project       = var.project
-  name          = var.bucket-name
+  name          = var.gcs-tf-bucket
   location      = "europe-west1"
   force_destroy = true
   storage_class = "REGIONAL"
