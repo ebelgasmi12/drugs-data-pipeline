@@ -1,4 +1,6 @@
 
+#!/bin/bash
+
 # Get script directory (allows to launch script from anywhere)
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
