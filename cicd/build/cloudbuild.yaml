@@ -25,10 +25,10 @@ steps:
 # Deploy Kubernetes Cluster in GKE
 - id: "Terraform Deploy GKE Cluster"
   name: "hashicorp/terraform:0.11.14"
-  entrypoint: bash
+  entrypoint: sh
   args: 
   - "-c" 
-  - bash cicd/deploy/kube-tf/apply.sh
+  - sh cicd/deploy/kube-tf/apply.sh
 
 # - name: "gcr.io/cloud-builders/kubectl"
 #   args: ["set", "image", "deployment/my-deployment", "my-container=gcr.io/$PROJECT_NAME/$REPO_NAME-$BRANCH_NAME"]
