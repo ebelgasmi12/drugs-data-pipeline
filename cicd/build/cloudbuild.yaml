@@ -28,7 +28,9 @@ steps:
   entrypoint: sh
   args: 
   - "-c" 
-  - sh cicd/deploy/kube-tf/apply.sh
+  - |
+    cd cicd/deploy/kube-tf &&
+    sh apply.sh
 
 # - name: "gcr.io/cloud-builders/kubectl"
 #   args: ["set", "image", "deployment/my-deployment", "my-container=gcr.io/$PROJECT_NAME/$REPO_NAME-$BRANCH_NAME"]
