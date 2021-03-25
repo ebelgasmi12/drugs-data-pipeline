@@ -10,7 +10,6 @@ then
     echo "********************************* APPLYING ************************************"
     echo "Execucting terraform command in folder: $SCRIPT_DIR"
     echo "*******************************************************************************"
-fi
     # Terraform deploy commands
     terraform init $SCRIPT_DIR
     terraform get $SCRIPT_DIR
