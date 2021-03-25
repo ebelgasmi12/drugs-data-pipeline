@@ -1,0 +1,51 @@
+steps:
+
+# Build Docker image from Dockerfile
+- id: "Build Airflow Docker Image"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["build", "-t", "${_IMAGE_NAME}", "."]
+  timeout: 200s
+
+# Push Docker image to Google Cloud Registry  
+- id: "Push Airflow Docker Image"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["push", "${_IMAGE_NAME}"]
+  timeout: 200s
+
+# Execute Unit Tests 
+- id: "Execute Unit Tests"
+  name: "gcr.io/cloud-builders/docker"
+  entrypoint: bash
+  args:
+  - "-c"
+  - |
+    docker run --entrypoint bash $_IMAGE_NAME \
+    -c 'airflow db init && pytest $_UNITTEST_PATH'
+
+# Deploy Kubernetes Cluster in GKE
+- id: "Terraform Deploy GKE Cluster"
+  name: "hashicorp/terraform:0.11.14"
+  entrypoint: bash
+  args: 
+  - "-c"
+  - bash cicd/deploy/kube-tf/apply.sh
+  
+# - name: "gcr.io/cloud-builders/kubectl"
+#   args: ["set", "image", "deployment/my-deployment", "my-container=gcr.io/$PROJECT_NAME/$REPO_NAME-$BRANCH_NAME"]
+#   env:
+#   - "CLOUDSDK_COMPUTE_ZONE=us-east4-b"
+#   - "CLOUDSDK_CONTAINER_CLUSTER=my-cluster"
+# options:
+#     machineType: "N1_HIGHCPU_8"
+substitutions:
+  _IMAGE_NAME: "gcr.io/${PROJECT_ID}/${REPO_NAME}-${BRANCH_NAME}"
+  _UNITTEST_PATH: "dags/drugs_data_pipeline/tests/unit"
+
+images: ["${_IMAGE_NAME}"]
+
+timeout: 660s
+
+options:
+  dynamic_substitutions: true
+
+tags: ["${REPO_NAME}", "${BRANCH_NAME}"]
