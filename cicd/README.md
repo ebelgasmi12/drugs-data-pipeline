@@ -23,7 +23,7 @@ Ce répertoire est structuré ainsi :
 
 Le schéma suivant illustre l'architecture DevOps de la solution :
 
-![Architecture de déploiement](../img/devops-schema.PNG)
+![Architecture de déploiement](../img/devops-schema.png)
 
 Ce schéma est décrit par le scénario ci-dessous :
 

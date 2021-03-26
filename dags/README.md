@@ -24,7 +24,7 @@ Ce répertoire est structuré ainsi :
 
 Le DAG contient un ensemble de tâches regroupées par type sous forme de Task Groups. L'image ci-dessous représente une vue d'ensemble du DAG :
 
-![DAG overview](../img/dag-overview.PNG)
+![DAG overview](../img/dag-overview.png)
 
 Comme illustré, le DAG contient 3 tâches principales :
 1- ```create_tables``` : Ce Task Group crée les tables qui seront par la suite alimentées par des fichiers CSV et JSON. Les sous-tâches de ce Task Group utilisent l'opérateur [***PostgresOperator***](https://airflow.apache.org/docs/apache-airflow-providers-postgres/stable/operators/postgres_operator_howto_guide.html)
@@ -35,7 +35,7 @@ Comme illustré, le DAG contient 3 tâches principales :
 
 Le graphe complet (en faisant apparaitre les sous-tâches) a la forme suivante :
 
-![DAG subtasks](../img/dag-subtasks.PNG)
+![DAG subtasks](../img/dag-subtasks.png)
 
 On peut constater à travers ce schéma les liens qui existent entre les sous-tâches des Task Groups.
 En effet, si l'on prend comme exemple la table ```pubmed```, son alimentation se fait à travers 2 types de fichiers (JSON et CSV), d'où le lien de dépendance entre la sous-tâche **create_pubmed_table** et les 2 sous-tâches **insert_csv_into_pubmed_table** et **insert_json_into_pubmed_table**.
