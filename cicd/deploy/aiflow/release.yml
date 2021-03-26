@@ -1,13 +1,15 @@
 
-airflow:
-  executor: "KubernetesExecutor"
+executor: "KubernetesExecutor"
+
+loadExamples: false
+
   image:
-    repository: "airflow-test"
+    repository: "apache/airflow"
     tag: "latest"
   config:
     AIRFLOW__KUBERNETES__DAGS_IN_IMAGE: "True"
     AIRFLOW__KUBERNETES__NAMESPACE: "dev"
-    AIRFLOW__KUBERNETES__WORKER_CONTAINER_REPOSITORY: "gcr.io/mehdib-airflow-project/drugs-data-pipeline-dev"
+    AIRFLOW__KUBERNETES__WORKER_CONTAINER_REPOSITORY: "apache/airflow"
     AIRFLOW__KUBERNETES__WORKER_CONTAINER_TAG: "latest"
     AIRFLOW__KUBERNETES__RUN_AS_USER: "50000"
     AIRFLOW__CORE__LOAD_EXAMPLES: "False"

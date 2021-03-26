@@ -8,6 +8,9 @@ def transform_records(records):
     """
     # Init results dict
     results = {}
+    # Init journals hashes
+    # for each drug
+    drugs_journals_hashes = {}
     # For each record
     for record in records:
         # Get values
@@ -19,21 +22,31 @@ def transform_records(records):
         # New drug case
         if drug not in results.keys():
             # Construct new drugs relations dict
+            publication_dict = {"title": title, "date": date}
+            journal_dict = {"title": journal, "date": date}
             drug_dict = {
-                publication: [{"title": title, "date": date}],
-                "journals": [{"title": journal, "date": date}]
+                publication: [publication_dict],
+                "journals": [journal_dict]
             }
             # Add drug to results
             results[drug] = drug_dict
+            # register journal hash
+            journal_hash = hash(frozenset(journal_dict.items()))
+            drugs_journals_hashes[drug] = [journal_hash]
         # Registred drug case
         elif drug in results.keys():
             # Add publication to drug relations
             publications = results[drug].get(publication) or []
-            publications.append({"title": title, "date": date})
+            publication_dict = {"title": title, "date": date}
+            publications.append(publication_dict)
             results[drug][publication] = publications
-            # Add journal to drug relations
-            journals = results[drug].get("journals") or []
-            journals.append({"title": journal, "date": date})
-            results[drug]["journals"] = journals
+            # Add journal to drug relations (if new)
+            journal_dict = {"title": journal, "date": date}
+            journal_hash = hash(frozenset(journal_dict.items()))
+            if journal_hash not in drugs_journals_hashes[drug]:
+                journals = results[drug]["journals"]
+                journals.append(journal_dict)
+                results[drug]["journals"] = journals
+                drugs_journals_hashes[drug] = [journal_hash]
     # Return drugs relations
     return results

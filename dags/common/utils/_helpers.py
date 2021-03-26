@@ -53,16 +53,13 @@ def parse_file(file_path, extension, delimiter):
             fields = rows.pop(0)
         # JSON file case
         elif extension == "json":
-            # Init dict
-            content = {}
             # Get content using "json" library
-            try: content = json.load(file_)
-            # If "json" fails, use "ast" library
-            except: content = ast.literal_eval(file_.read())
+            # content = json.load(file_)
+            content = ast.literal_eval(file_.read())
             # Get rows and fields from content
-            fields = list(json_file[0].keys())
+            fields = list(content[0].keys())
             rows = [[row[field] for field in fields]
-                    for row in json_file]
+                    for row in content]
         # Other file types
         else:
             # Raise Type Error

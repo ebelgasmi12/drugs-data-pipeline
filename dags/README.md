@@ -1,4 +1,4 @@
-# DAGS
+# Drugs Data Pipeline [DAGs]
 
 ## I. Description
 
@@ -17,7 +17,7 @@ Ce répertoire est structuré ainsi :
         ├── config               # Fichier de configuration du DAG
         ├── data                 # Données input et output du DAG
         ├── sql                  # Requêtes SQL utilisées pour interagir avec PostgreSQL
-        ├── test                 # Répertoire de tests (unitaires et intégration)
+        ├── tests                # Répertoire de tests (unitaires et intégration)
         ├── dag.py               # Entrypoint du DAG
 
 ## III. Structure du graphe (DAG)
@@ -92,15 +92,15 @@ Le schéma du fichier JSON est donc le suivant :
 
 ## V. Bonnes pratiques
 
-- Tous les fichiers (code et configuration) sont commentés en anglais, soit par ligne ou par bloc d'instructions.
+- Tous les fichiers (code et configuration) sont **commentés en anglais**, soit par ligne ou par bloc d'instructions.
 
-- Les classes, méthodes et fonctions implémentées sont munis de docstrings qui contiennent :
+- Les classes, méthodes et fonctions implémentées sont munis de **docstrings** qui contiennent :
 
-  - Une description générale
-  - Un listing des paramètres en entrée et des valeurs en sortie
-  - Une description par paramètre / valeur
-  - Le type de valeur en sortie
+  - Une **description générale**
+  - Un listing des **paramètres** en entrée et des **valeurs** en sortie
+  - Une **description par paramètre** / valeur
+  - Le **type de valeur** en sortie
 
 - Le code suit les principales règles définies dans le guide [***PEP 8***](https://www.python.org/dev/peps/pep-0008/). ```Exemple :``` Les lignes ne dépassent pas 79 caractères.
 
-- Le code et la configuration son séparés dans des fichiers distincts. Aucune configuration n'est incluse directement dans le code.
+- Le code et la configuration son **séparés** dans des fichiers distincts. Aucune configuration n'est incluse directement dans le code.

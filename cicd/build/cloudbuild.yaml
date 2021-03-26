@@ -20,7 +20,7 @@ steps:
   - "-c"
   - |
     docker run --entrypoint bash $_IMAGE_NAME \
-    -c 'airflow initdb && pytest $_UNITTEST_PATH'
+    -c 'airflow db init && pytest $_UNITTEST_PATH'
 
 # Deploy Kubernetes Cluster in GKE
 - id: "Terraform Deploy GKE Cluster"
