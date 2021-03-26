@@ -15,7 +15,7 @@ La Data Pipeline suit les étapes suivantes:
 
 Ce processus est décrit à travers le graphe (DAG) suivant :
 
-![DAG](./img/dag-subtasks.PNG)
+![DAG](./img/dag-subtasks.png)
 
 ## II. Technologies utilisées
 
@@ -106,15 +106,15 @@ Cela peut être fait à travers l'interface Airflow :
 
 - Premièrement, dans l'onglet Admin en haut, aller dans **Connections** :
 
-![Connections](./img/connections.PNG)
+![Connections](./img/connections.png)
 
 - Ensuite, cliquer sur l'icone **(+)** pour ajouter une connexion :
 
-![New connection](./img/new-connection.PNG)
+![New connection](./img/new-connection.png)
 
 - Finalement, créer la connexion en spécifiant les **paramètres de connexion** au schéma (base de données) PostgreSQL :
 
-![Create connection](./img/create-connection.PNG)
+![Create connection](./img/create-connection.png)
 
 > **IMPORTANT :** La valeur du champ "Conn ID" doit être identique à celle spécifiée dans le fichier de configuration [```dags/drugs_data_pipeline/config/config.py```](dags/drugs_data_pipeline/config/config.py)
 
@@ -128,17 +128,17 @@ Pour exécuter la Data Pipeline :
 
 - Aller sur l'interface Airflow et appuyer sur **"unpause DAG"** :
 
-![Unpause DAG](./img/unpause-dag.PNG)
+![Unpause DAG](./img/unpause-dag.png)
 
 - Cliquer ensuite sur le DAG drugs-data-pipeline puis sur l'onglet **Graph View** :
 
-![Graph View](./img/graph-view.PNG)
+![Graph View](./img/graph-view.png)
 
 - Le DAG est en statut **"running"**. Attendre que l'exécution se termine. Après exécution, toutes les tâches passeront en statut **"success"** :
 
-![New connection](./img/dag-running.PNG)
+![New connection](./img/dag-running.png)
 
-![New connection](./img/dag-success.PNG)
+![New connection](./img/dag-success.png)
 
 - Vous verez apparaitre un nouveau **fichier JSON** dans le répertoire ```dags/drugs_data_pipeline/data/output``` qui représente le **graphe de liaison** souhaité.
 
