@@ -27,7 +27,7 @@ Le schéma suivant illustre l'architecture DevOps de la solution :
 
 Ce schéma est décrit par le scénario ci-dessous :
 
-1. Le développeur réalise un **push** dans une **branche** GitHub (dev, test, master)
+1. Le développeur réalise un **push** dans une **branche** GitHub (dev, test, main)
 2. Un **trigger** est déclenché dans **Cloud Build** qui va :
     - **Récupérer le code** depuis GitHub
     - **Construire une image Docker** pour Airflow
@@ -75,6 +75,6 @@ Voici un [lien](https://cloud.google.com/build/docs/automating-builds/create-man
 
 Au moment de la création du trigger, il faut spécifier la variable d'environnement ```TF_BUCKET_NAME``` qui a pour valeur le nom du Bucket GCS créé précédemment.
 
-> **N.B. :** Les composants de déploiement étant variabilisés en fonction du nom de la branche, la création d'un seul trigger est suffisante. Cependant il faut restreindre les branches ciblées par Cloud Build à dev, test et master.
+> **N.B. :** Les composants de déploiement étant variabilisés en fonction du nom de la branche, la création d'un seul trigger est suffisante. Cependant il faut restreindre les branches ciblées par Cloud Build à dev, test et main.
 
-Après réalisation de ces étapes, le déploiement se fera de façon automatique dans GKE après chaque push dans les branches (dev, test, master).
+Après réalisation de ces étapes, le déploiement se fera de façon automatique dans GKE après chaque push dans les branches (dev, test, main).
