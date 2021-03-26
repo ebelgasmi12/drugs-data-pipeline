@@ -47,6 +47,6 @@ def transform_records(records):
                 journals = results[drug]["journals"]
                 journals.append(journal_dict)
                 results[drug]["journals"] = journals
-                drugs_journals_hashes[drug] = [journal_hash]
+                drugs_journals_hashes[drug].append(journal_hash)
     # Return drugs relations
     return results
