@@ -36,7 +36,7 @@ steps:
 - id: "Terraform Deploy GKE Cluster"
   name: gcr.io/cloud-builders/kubectl
   args: ["create", "-f", "$_AIRFLOW_NAMESPACE", "--dry-run=client", "-o", "yaml", "|",
-         "kubectl", "apply", "-f" "-"]
+         "kubectl", "apply", "-f", "-"]
 
 
 # Create/update Airflow Helm chart
