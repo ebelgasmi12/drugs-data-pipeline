@@ -33,14 +33,14 @@ steps:
     cd cicd/deploy/terraform && bash apply.sh
 
 # Create/update deployment Namespace
-- id: "Terraform Deploy GKE Cluster"
+- id: "Kubectl Create Namespace"
   name: gcr.io/cloud-builders/kubectl
   args: ["create", "-f", "$_AIRFLOW_NAMESPACE", "--dry-run=client", "-o", "yaml", "|",
          "kubectl", "apply", "-f", "-"]
 
 
 # Create/update Airflow Helm chart
-- id: "Terraform Deploy GKE Cluster"
+- id: "Helm Update Airflow Chart"
   name: gcr.io/${PROJECT_ID}/helm
   entrypoint: bash
   args:
