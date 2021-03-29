@@ -3,13 +3,13 @@ steps:
 # Build Docker image from Dockerfile
 - id: "Build Airflow Docker Image"
   name: "gcr.io/cloud-builders/docker"
-  args: ["build", "-t", "${_IMAGE_NAME}", "."]
+  args: ["build", "-t", "${_AIRFLOW_IMAGE_NAME}", "."]
   timeout: 200s
 
 # Push Docker image to Google Cloud Registry  
 - id: "Push Airflow Docker Image"
   name: "gcr.io/cloud-builders/docker"
-  args: ["push", "${_IMAGE_NAME}"]
+  args: ["push", "${_AIRFLOW_IMAGE_NAME}"]
   timeout: 200s
 
 # Execute Unit Tests 
@@ -19,7 +19,7 @@ steps:
   args:
   - "-c"
   - |
-    docker run --entrypoint bash $_IMAGE_NAME \
+    docker run --entrypoint bash $_AIRFLOW_IMAGE_NAME \
     -c 'airflow db init && pytest $_UNITTEST_PATH'
 
 # Deploy Kubernetes Cluster in GKE
@@ -32,18 +32,30 @@ steps:
     export BRANCH_NAME = $BRANCH_NAME
     cd cicd/deploy/terraform && bash apply.sh
 
-# - name: "gcr.io/cloud-builders/kubectl"
-#   args: ["set", "image", "deployment/my-deployment", "my-container=gcr.io/$PROJECT_NAME/$REPO_NAME-$BRANCH_NAME"]
-#   env:
-#   - "CLOUDSDK_COMPUTE_ZONE=us-east4-b"
-#   - "CLOUDSDK_CONTAINER_CLUSTER=my-cluster"
-# options:
-#     machineType: "N1_HIGHCPU_8"
-substitutions:
-  _IMAGE_NAME: "gcr.io/${PROJECT_ID}/${REPO_NAME}-${BRANCH_NAME}"
-  _UNITTEST_PATH: "dags/drugs_data_pipeline/tests/unit"
+# Create/update deployment Namespace
+- id: "Terraform Deploy GKE Cluster"
+  name: gcr.io/cloud-builders/kubectl
+  args: ["create", "-f", "$_AIRFLOW_NAMESPACE", "--dry-run=client", "-o", "yaml", "|",
+         "kubectl", "apply", "-f" "-"]
 
-images: ["${_IMAGE_NAME}"]
+
+# Create/update Airflow Helm chart
+- id: "Terraform Deploy GKE Cluster"
+  name: gcr.io/${PROJECT_ID}/helm
+  entrypoint: bash
+  args:
+  - "-c"
+  - "helm upgrade airflow $_AIRFLOW_CHART --namespace $BRANCH_NAME --values $_AIRFLOW_RELEASE"
+  
+
+substitutions:
+  _AIRFLOW_IMAGE_NAME: "gcr.io/${PROJECT_ID}/${REPO_NAME}-${BRANCH_NAME}"
+  _UNITTEST_PATH: "dags/drugs_data_pipeline/tests/unit"
+  _AIRFLOW_NAMESPACE: "cicd/deploy/kubernetes/namespace/namespace.yml"
+  _AIRFLOW_CHART: "stable/airflow"
+  _AIRFLOW_RELEASE: "cicd/deploy/aiflow/release.yml"
+
+images: ["${_AIRFLOW_IMAGE_NAME}"]
 
 timeout: 660s
 
